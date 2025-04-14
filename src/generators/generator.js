@@ -40,9 +40,26 @@ forBlock['enable_objects'] = function (block, generator) {
   } else {
     return 'REG_DISPCNT &= ~OBJ_ON;\n';
   }
-}
+};
 
 forBlock['show_sprite'] = function (block, generator) {
+  const doShow = block.getFieldValue('DO_SHOW') === 'true';
   const spriteNumber = block.getFieldValue('SPRITE_NO').toString();
-  return `OAM[${spriteNumber}] `
-}
+  if (doShow) {
+    return `OAM[${spriteNumber}].attr0 &= ~OBJ_DISABLE;\n`;
+  } else {
+    return `OAM[${spriteNumber}].attr0 |= OBJ_DISABLE;\n`;
+  }
+};
+
+forBlock['move_sprite'] = function (block, generator) {
+  const spriteNumber = block.getFieldValue('SPRITE_NO').toString();
+  const x = block.getFieldValue('X');
+  const y = block.getFieldValue('Y');
+  
+  let code = `OAM[${spriteNumber}].attr0 &= ~(0xFF);\n`;
+  code += `OAM[${spriteNumber}].attr0 |= ${y};\n`;
+  code += `OAM[${spriteNumber}].attr1 &= ~(0x1FF);\n`;
+  code += `OAM[${spriteNumber}].attr1 |= ${x};\n`;
+  return code;
+};

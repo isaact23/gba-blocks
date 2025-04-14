@@ -92,13 +92,51 @@ const enableObjects = {
 const showSprite = {
   type: 'show_sprite',
   style: 'sprite_blocks',
-  message0: 'Show sprite %1',
+  message0: '%1 sprite %2',
+  args0: [
+    {
+      type: 'field_dropdown',
+      name: 'DO_SHOW',
+      options: [
+        ['Show', 'true'],
+        ['Hide', 'false']
+      ]
+    },
+    {
+      type: 'field_number',
+      name: 'SPRITE_NO',
+      min: 0,
+      max: 127
+    }
+  ],
+  previousStatement: null,
+  nextStatement: null,
+  tooltip: '',
+  helpUrl: ''
+};
+
+const moveSprite = {
+  type: 'move_sprite',
+  style: 'sprite_blocks',
+  message0: 'Move sprite %1 to x %2 y %3',
   args0: [
     {
       type: 'field_number',
       name: 'SPRITE_NO',
       min: 0,
       max: 127
+    },
+    {
+      type: 'field_number',
+      name: 'X',
+      min: 0,
+      max: 511
+    },
+    {
+      type: 'field_number',
+      name: 'Y',
+      min: 0,
+      max: 255
     }
   ],
   previousStatement: null,
@@ -112,5 +150,6 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   setDisplayMode,
   enableBackground,
   enableObjects,
-  showSprite
+  showSprite,
+  moveSprite
 ]);

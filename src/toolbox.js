@@ -53,6 +53,10 @@ export const toolbox = {
         {
           kind: 'block',
           type: 'show_sprite'
+        },
+        {
+          kind: 'block',
+          type: 'move_sprite'
         }
       ]
     },
