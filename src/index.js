@@ -23,6 +23,7 @@ const outputDiv = document.getElementById('output');
 const blocklyDiv = document.getElementById('blocklyDiv');
 const ws = Blockly.inject(blocklyDiv, {
   toolbox: toolbox,
+  renderer: 'zelos',
   theme: theme
 });
 

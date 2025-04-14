@@ -12,7 +12,16 @@ import {Order} from 'blockly/javascript';
 export const forBlock = Object.create(null);
 
 forBlock['on_game_start'] = function (block, generator) {
-  return 'on game start\n';
+  return "hello";
+  
+  let code = '#include <gba.h>\n\nint main() {\n';
+  let nextBlock = block.getNextBlock();
+  while (nextBlock) {
+    code += generator.blockToCode(nextBlock);
+    nextBlock = nextBlock.getNextBlock();
+  }
+  code += '\n}\n';
+  return code;
 };
 
 forBlock['enable_background'] = function (block, generator) {
@@ -21,6 +30,6 @@ forBlock['enable_background'] = function (block, generator) {
   if (enable) {
     return `REG_DISPCNT |= BG${bg}_ON;\n`;
   } else {
-    return `REG_DISPCNT ^= ~BG${bg}_ON;\n`;
+    return `REG_DISPCNT &= ~BG${bg}_ON;\n`;
   }
 };
