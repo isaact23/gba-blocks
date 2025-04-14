@@ -17,6 +17,28 @@ const onGameStart = {
   helpUrl: ''
 }
 
+const setDisplayMode = {
+  type: 'set_display_mode',
+  style: 'video_blocks',
+  message0: 'Set display mode to %1',
+  args0: [
+    {
+      type: 'field_dropdown',
+      name: 'MODE',
+      options: [
+        ['0', '0'],
+        ['1', '1'],
+        ['2', '2'],
+        ['3', '3'],
+        ['4', '4'],
+        ['5', '5'],
+      ]
+    }
+  ],
+  previousStatement: null,
+  nextStatement: null,
+}
+
 const enableBackground = {
   type: 'enable_background',
   style: 'video_blocks',
@@ -49,5 +71,6 @@ const enableBackground = {
 
 export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   onGameStart,
+  setDisplayMode,
   enableBackground
 ]);

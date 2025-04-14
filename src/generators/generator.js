@@ -13,8 +13,14 @@ export const forBlock = Object.create(null);
 
 forBlock['on_game_start'] = function (block, generator) {
   const members = generator.statementToCode(block, 'MEMBERS');
+  return '#include <gba.h>\n\nint main() {\n' + members + "}\n";
+};
 
-  return '#include <gba.h>\n\nint main() {\n' + members + "\n}\n";
+forBlock['set_display_mode'] = function (block, generator) {
+  const mode = block.getFieldValue('MODE');
+  let code = "REG_DISPCNT &= ~(0x7)\n"
+  code += "REG_DISPCNT |= ${mode}\n";
+  return code;
 };
 
 forBlock['enable_background'] = function (block, generator) {
@@ -26,3 +32,5 @@ forBlock['enable_background'] = function (block, generator) {
     return `REG_DISPCNT &= ~BG${bg}_ON;\n`;
   }
 };
+
+
