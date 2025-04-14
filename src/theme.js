@@ -7,8 +7,7 @@ export const theme = Blockly.Theme.defineTheme('mainTheme', {
          'colourPrimary': '200'
       },
       'control_blocks': {
-         'colourPrimary': '50',
-         'hat': 'cap'
+         'colourPrimary': '50'
       }
    },
    'categoryStyles': {

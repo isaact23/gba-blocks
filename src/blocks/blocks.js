@@ -3,8 +3,16 @@ import * as Blockly from 'blockly/core';
 const onGameStart = {
   type: 'on_game_start',
   style: 'control_blocks',
-  message0: 'On game start',
-  nextStatement: null,
+  message0: 'On game start %1 %2',
+  args0: [
+    {
+      type: 'input_dummy'
+    },
+    {
+      type: 'input_statement',
+      name: 'MEMBERS'
+    }
+  ],
   tooltip: '',
   helpUrl: ''
 }
