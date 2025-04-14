@@ -17,6 +17,17 @@ export const toolbox = {
   contents: [
     {
       kind: 'category',
+      name: 'Control',
+      categorystyle: 'control_category',
+      contents: [
+        {
+          kind: 'block',
+          type: 'on_game_start'
+        }
+      ]
+    },
+    {
+      kind: 'category',
       name: 'Video',
       categorystyle: 'video_category',
       contents: [
@@ -27,17 +38,21 @@ export const toolbox = {
         {
           kind: 'block',
           type: 'enable_background'
+        },
+        {
+          kind: 'block',
+          type: 'enable_objects'
         }
       ]
     },
     {
       kind: 'category',
-      name: 'Control',
-      categorystyle: 'control_category',
+      name: 'Sprites',
+      categorystyle: 'sprite_category',
       contents: [
         {
           kind: 'block',
-          type: 'on_game_start'
+          type: 'show_sprite'
         }
       ]
     },

@@ -18,8 +18,8 @@ forBlock['on_game_start'] = function (block, generator) {
 
 forBlock['set_display_mode'] = function (block, generator) {
   const mode = block.getFieldValue('MODE');
-  let code = "REG_DISPCNT &= ~(0x7)\n"
-  code += "REG_DISPCNT |= ${mode}\n";
+  let code = "REG_DISPCNT &= ~(0x7);\n"
+  code += `REG_DISPCNT |= ${mode};\n`;
   return code;
 };
 
@@ -33,4 +33,16 @@ forBlock['enable_background'] = function (block, generator) {
   }
 };
 
+forBlock['enable_objects'] = function (block, generator) {
+  const enable = block.getFieldValue('DO_ENABLE') === 'true';
+  if (enable) {
+    return 'REG_DISPCNT |= OBJ_ON;\n';
+  } else {
+    return 'REG_DISPCNT &= ~OBJ_ON;\n';
+  }
+}
 
+forBlock['show_sprite'] = function (block, generator) {
+  const spriteNumber = block.getFieldValue('SPRITE_NO').toString();
+  return `OAM[${spriteNumber}] `
+}

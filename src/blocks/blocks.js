@@ -69,8 +69,48 @@ const enableBackground = {
   helpUrl: ''
 };
 
+const enableObjects = {
+  type: 'enable_objects',
+  style: 'video_blocks',
+  message0: '%1 objects',
+  args0: [
+    {
+      type: 'field_dropdown',
+      name: 'DO_ENABLE',
+      options: [
+        ['Enable', 'true'],
+        ['Disable', 'false']
+      ]
+    }
+  ],
+  previousStatement: null,
+  nextStatement: null,
+  tooltip: '',
+  helpUrl: ''
+};
+
+const showSprite = {
+  type: 'show_sprite',
+  style: 'sprite_blocks',
+  message0: 'Show sprite %1',
+  args0: [
+    {
+      type: 'field_number',
+      name: 'SPRITE_NO',
+      min: 0,
+      max: 127
+    }
+  ],
+  previousStatement: null,
+  nextStatement: null,
+  tooltip: '',
+  helpUrl: ''
+}
+
 export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   onGameStart,
   setDisplayMode,
-  enableBackground
+  enableBackground,
+  enableObjects,
+  showSprite
 ]);
