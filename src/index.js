@@ -6,12 +6,15 @@
 
 import * as Blockly from 'blockly';
 import {blocks} from './blocks/blocks';
+import {convertImage} from './gba/imageConverter';
 import {forBlock} from './generators/generator';
 import {javascriptGenerator} from 'blockly/javascript';
 import {save, load} from './serialization';
 import {toolbox} from './toolbox';
 import {theme} from './theme';
 import './index.css';
+
+export let tilemapData = "";
 
 // Register the blocks and generator with Blockly
 Blockly.common.defineBlocks(blocks);
@@ -21,6 +24,7 @@ Object.assign(javascriptGenerator.forBlock, forBlock);
 const codeDiv = document.getElementById('generatedCode').firstChild;
 const outputDiv = document.getElementById('output');
 const blocklyDiv = document.getElementById('blocklyDiv');
+const tilemapFile = document.getElementById('tilemapFile');
 const ws = Blockly.inject(blocklyDiv, {
   toolbox: toolbox,
   renderer: 'zelos',
@@ -61,5 +65,19 @@ ws.addChangeListener((e) => {
   ) {
     return;
   }
+  runCode();
+});
+
+// Update code when tilemap changes
+tilemapFile.addEventListener("change", async (e) => {
+  const tilemap = document.getElementById('tilemapFile');
+  const img = tilemap.files[0];
+  if (img !== undefined) {
+    const conversion = await convertImage(img);
+    console.log(conversion);
+    tilemapData = conversion.source;
+    console.log(tilemapData);
+  }
+
   runCode();
 });

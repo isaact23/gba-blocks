@@ -143,6 +143,30 @@ const moveSprite = {
   nextStatement: null,
   tooltip: '',
   helpUrl: ''
+};
+
+const setSpriteTile = {
+  type: 'set_sprite_tile',
+  style: 'sprite_blocks',
+  message0: 'Set sprite %1 tile %2',
+  args0: [
+    {
+      type: 'field_number',
+      name: 'SPRITE_NO',
+      min: 0,
+      max: 127
+    },
+    {
+      type: 'field_number',
+      name: 'TILE_NO',
+      min: 0,
+      max: 1023
+    }
+  ],
+  previousStatement: null,
+  nextStatement: null,
+  tooltip: '',
+  helpUrl: ''
 }
 
 export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
@@ -151,5 +175,6 @@ export const blocks = Blockly.common.createBlockDefinitionsFromJsonArray([
   enableBackground,
   enableObjects,
   showSprite,
-  moveSprite
+  moveSprite,
+  setSpriteTile
 ]);

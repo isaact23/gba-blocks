@@ -57,6 +57,10 @@ export const toolbox = {
         {
           kind: 'block',
           type: 'move_sprite'
+        },
+        {
+          kind: 'block',
+          type: 'set_sprite_tile'
         }
       ]
     },

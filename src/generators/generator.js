@@ -5,6 +5,7 @@
  */
 
 import {Order} from 'blockly/javascript';
+import {tilemapData} from '../index';
 
 // Export all the code generators for our custom blocks,
 // but don't register them with Blockly yet.
@@ -13,7 +14,12 @@ export const forBlock = Object.create(null);
 
 forBlock['on_game_start'] = function (block, generator) {
   const members = generator.statementToCode(block, 'MEMBERS');
-  return '#include <gba.h>\n\nint main() {\n' + members + "}\n";
+  let code = '#include <gba.h>\n\n';
+
+  code += tilemapData;
+
+  code += 'int main() {\n' + members + "}\n";
+  return code;
 };
 
 forBlock['set_display_mode'] = function (block, generator) {
@@ -44,7 +50,7 @@ forBlock['enable_objects'] = function (block, generator) {
 
 forBlock['show_sprite'] = function (block, generator) {
   const doShow = block.getFieldValue('DO_SHOW') === 'true';
-  const spriteNumber = block.getFieldValue('SPRITE_NO').toString();
+  const spriteNumber = block.getFieldValue('SPRITE_NO');
   if (doShow) {
     return `OAM[${spriteNumber}].attr0 &= ~OBJ_DISABLE;\n`;
   } else {
@@ -53,7 +59,7 @@ forBlock['show_sprite'] = function (block, generator) {
 };
 
 forBlock['move_sprite'] = function (block, generator) {
-  const spriteNumber = block.getFieldValue('SPRITE_NO').toString();
+  const spriteNumber = block.getFieldValue('SPRITE_NO');
   const x = block.getFieldValue('X');
   const y = block.getFieldValue('Y');
   
@@ -61,5 +67,14 @@ forBlock['move_sprite'] = function (block, generator) {
   code += `OAM[${spriteNumber}].attr0 |= ${y};\n`;
   code += `OAM[${spriteNumber}].attr1 &= ~(0x1FF);\n`;
   code += `OAM[${spriteNumber}].attr1 |= ${x};\n`;
+  return code;
+};
+
+forBlock['set_sprite_tile'] = function (block, generator) {
+  const spriteNumber = block.getFieldValue('SPRITE_NO');
+  const tileNumber = block.getFieldValue('TILE_NO');
+
+  let code = `OAM[${spriteNumber}].attr2 &= ~(0x3FF);\n`;
+  code += `OAM[${spriteNumber}].attr2 |= ${tileNumber};\n`;
   return code;
 };
