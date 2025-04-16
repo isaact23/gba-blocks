@@ -5,6 +5,7 @@
  */
 
 import * as Blockly from 'blockly';
+import fileSaver from "file-saver";
 import {javascriptGenerator} from 'blockly/javascript';
 import {blocks} from './blocks/blocks';
 import {forBlock} from './generators/generator';
@@ -20,6 +21,7 @@ Object.assign(javascriptGenerator.forBlock, forBlock);
 
 const codeDiv = document.getElementById('generatedCode').firstChild;
 const outputDiv = document.getElementById('output');
+const downloadBtn = document.getElementById('downloadCodeBtn');
 
 // Set up UI elements and inject Blockly
 const blocklyDiv = document.getElementById('blocklyDiv');
@@ -64,4 +66,9 @@ ws.addChangeListener((e) => {
   runCode();
 });
 
-
+// Download code when download button is pressed
+downloadBtn.addEventListener("click", (e) => {
+  runCode();
+  const blob = new Blob([codeDiv.innerText], {type: "text/c;charset=utf-8"});
+  fileSaver.saveAs(blob, "main.c");
+});

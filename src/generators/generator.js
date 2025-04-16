@@ -7,6 +7,16 @@
 import {Order} from 'blockly/javascript';
 import {isTilemapLoaded, getTilemapString} from '../gba/tilemapLoader';
 
+const getIrqInsert = () => {
+  let code = '  irqInit();\n';
+  code += '  irqEnable(IRQ_VBLANK);\n';
+  code += '  while (1) {\n';
+  code += '    VBlankIntrWait();\n';
+  code += '  }\n'
+  code += "}\n";
+  return code;
+}
+
 // Export all the code generators for our custom blocks,
 // but don't register them with Blockly yet.
 // This file has no side effects!
@@ -24,8 +34,8 @@ forBlock['on_game_start'] = function (block, generator) {
     code += '  dmaCopy((u16*) tilemap_image, SPRITE_GFX, 32768);\n';
     code += '  dmaCopy(palette, SPRITE_PALETTE, 512);\n\n';
   }
-  code += members;
-  code += "}\n";
+  code += members + '\n';
+  code += getIrqInsert();
 
   return code;
 };

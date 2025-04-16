@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "blockly": "^11.0.0",
+    "file-saver": "^2.0.5",
     "image-pixels": "^2.2.2"
   }
 }
