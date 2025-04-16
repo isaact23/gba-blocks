@@ -5,7 +5,7 @@
  */
 
 import {Order} from 'blockly/javascript';
-import {tilemapData} from '../index';
+import {isTilemapLoaded, getTilemapString} from '../gba/tilemapLoader';
 
 // Export all the code generators for our custom blocks,
 // but don't register them with Blockly yet.
@@ -16,9 +16,17 @@ forBlock['on_game_start'] = function (block, generator) {
   const members = generator.statementToCode(block, 'MEMBERS');
   let code = '#include <gba.h>\n\n';
 
-  code += tilemapData;
+  if (isTilemapLoaded()) {
+    code += getTilemapString();
+  }
+  code += 'int main() {\n'
+  if (isTilemapLoaded()) {
+    code += '  dmaCopy((u16*) tilemap_image, SPRITE_GFX, 32768);\n';
+    code += '  dmaCopy(palette, SPRITE_PALETTE, 512);\n\n';
+  }
+  code += members;
+  code += "}\n";
 
-  code += 'int main() {\n' + members + "}\n";
   return code;
 };
 

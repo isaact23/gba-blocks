@@ -10,9 +10,15 @@ export async function convertImage(image) {
   const mode = 'tiles';
 
   const {data, width, height} = await getPixels(image);
-  const getPixel = (x, y, c) => {
-    return data[(y * 8) + (x * 4) + c];
+
+  if (width != 128 || height != 256) {
+    window.alert("Image dimensions must be 128x256");
+    return;
   }
+
+  const getPixel = (x, y, c) => {
+    return data[(y * width * 4) + (x * 4) + c];
+  };
 
   //const filename = filenameExt.replace(/\.[^/.]+$/, "")
 
@@ -105,6 +111,7 @@ export async function convertImage(image) {
     } else if (mode === "tiles") {
       // Create palette to store colors
       let palette = new Palette();
+      palette.addColor(rgbToGba(255, 0, 255)); // 0xFF00FF (transparent color)
 
       // Determine number of 8x8 tiles across/down
       let tileCountX = Math.ceil(width / 8);
@@ -120,7 +127,7 @@ export async function convertImage(image) {
 
       //c_text += rep;
       //c_text += c_include;
-      c_text += "const u8 tilemap_data[] = {";
+      c_text += "const u8 tilemap_image[] = {";
 
       // Iterate through tiles
       let tileNo = 0;
