@@ -37,7 +37,15 @@ export const toolbox = {
         },
         {
           kind: 'block',
+          type: 'enable_forced_blank'
+        },
+        {
+          kind: 'block',
           type: 'enable_background'
+        },
+        {
+          kind: 'block',
+          type: 'set_background_color_mode'
         },
         {
           kind: 'block',
@@ -56,11 +64,27 @@ export const toolbox = {
         },
         {
           kind: 'block',
+          type: 'show_all_sprites'
+        },
+        {
+          kind: 'block',
           type: 'move_sprite'
         },
         {
           kind: 'block',
           type: 'set_sprite_tile'
+        },
+        {
+          kind: 'block',
+          type: 'set_sprite_size'
+        },
+        {
+          kind: 'block',
+          type: 'set_sprite_shape'
+        },
+        {
+          kind: 'block',
+          type: 'set_sprite_color_mode'
         }
       ]
     },
