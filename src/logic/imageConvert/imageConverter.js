@@ -11,7 +11,7 @@ export async function convertImage(image) {
 
   const {data, width, height} = await getPixels(image);
 
-  if (width != 128 || height != 256) {
+  if (width !== 128 || height !== 256) {
     window.alert("Image dimensions must be 128x256");
     return;
   }
@@ -20,22 +20,11 @@ export async function convertImage(image) {
     return data[(y * width * 4) + (x * 4) + c];
   };
 
-  //const filename = filenameExt.replace(/\.[^/.]+$/, "")
-
   try {
     // Store output text
 
     let c_text = "";
     let h_text = "";
-    //let c_text = "// File: " + filename + ".c\n";
-    //let h_text = "// File: " + filename + ".h\n";
-
-    //const c_include = "#include \"" + filename + ".h\"\n\n";
-    //const h_include = "#include <stdint.h>\n\n";
-
-    //let img_header = "// Image: " + filenameExt + "\n";
-    //c_text += img_header;
-    //h_text += img_header;
 
     // Perform mode-dependent conversion
     if (mode === "bitmap32768") {
@@ -73,10 +62,6 @@ export async function convertImage(image) {
       const rep = "// Representation: Bitmap with Palette (256 colors)\n\n";
       h_text += rep;
       h_text += h_include;
-      //h_text += "#define img_" + filename + "_width " + width + "\n";
-      //h_text += "#define img_" + filename + "_height " + height + "\n\n";
-      //h_text += "extern const uint8_t img_" + filename + "_data[];\n";
-      //h_text += "extern const uint16_t img_" + filename + "_palette[];\n";
 
       c_text += rep;
       c_text += c_include;
@@ -117,16 +102,6 @@ export async function convertImage(image) {
       let tileCountX = Math.ceil(width / 8);
       let tileCountY = Math.ceil(height / 8);
 
-      //const rep = "// Representation: Tiles (8x8 squares, 256-color palette)\n\n";
-      //h_text += rep;
-      //h_text += h_include;
-      //h_text += "#define img_" + filename + "_tile_count_x " + tileCountX + "\n";
-      //h_text += "#define img_" + filename + "_tile_count_y " + tileCountY + "\n\n";
-      //h_text += "extern const uint8_t img_" + filename + "_data[];\n";
-      //h_text += "extern const uint16_t img_" + filename + "_palette[];\n";
-
-      //c_text += rep;
-      //c_text += c_include;
       c_text += "const u8 tilemap_image[] = {";
 
       // Iterate through tiles
@@ -179,11 +154,7 @@ export async function convertImage(image) {
       window.alert("Error during conversion: Mode " + mode.toString() + " not found");
       return;
     }
-
-    return {
-      source: c_text,
-      header: h_text
-    };
+    return c_text;
 
   } catch (e) {
     window.alert("Error during conversation: " + e);
