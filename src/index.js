@@ -9,6 +9,7 @@ import fileSaver from "file-saver";
 import {javascriptGenerator} from 'blockly/javascript';
 import {blocks} from './blocks/blocks';
 import {forBlock} from './generators/generator';
+import {createClass} from './classes/classManager';
 import {save, load} from './serialization';
 import {toolbox} from './toolbox';
 import {theme} from './theme';
@@ -22,6 +23,7 @@ Object.assign(javascriptGenerator.forBlock, forBlock);
 const codeDiv = document.getElementById('generatedCode').firstChild;
 const outputDiv = document.getElementById('output');
 const downloadBtn = document.getElementById('downloadCodeBtn');
+const createClassBtn = document.getElementById('createClassBtn');
 
 // Set up UI elements and inject Blockly
 const blocklyDiv = document.getElementById('blocklyDiv');
@@ -71,4 +73,11 @@ downloadBtn.addEventListener("click", (e) => {
   runCode();
   const blob = new Blob([codeDiv.innerText], {type: "text/c;charset=utf-8"});
   fileSaver.saveAs(blob, "main.c");
+});
+
+// Handle request to create a new class
+createClassBtn.addEventListener("click", (e) => {
+  let className = window.prompt("Enter class name", "New class");
+  if (className == null || className == '') return;
+  createClass(className);
 });
