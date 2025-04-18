@@ -5,7 +5,7 @@
  */
 
 import {Order} from 'blockly/javascript';
-import {isTilemapLoaded, getTilemapString} from '../gba/tilemapLoader';
+import {isTilemapLoaded, getTilemapString} from './gba/tilemapLoader';
 
 const getIrqInsert = () => {
   let code = '  irqInit();\n';
