@@ -2,7 +2,7 @@ import {useTilemap} from 'src/hooks/useTilemap';
 import * as Blockly from "blockly";
 
 export function useGenerator() {
-  const {isTilemapLoaded, getTilemapString} = useTilemap();
+  const {tilemap, tilemapString} = useTilemap();
   const generator = new Blockly.Generator('GBA');
 
   const getIrqInsert = () => {
@@ -22,11 +22,11 @@ export function useGenerator() {
     const members = generator.statementToCode(block, 'MEMBERS');
     let code = '#include <gba.h>\n\n';
 
-    if (isTilemapLoaded()) {
-      code += getTilemapString();
+    if (tilemap !== null) {
+      code += tilemapString;
     }
     code += 'int main() {\n'
-    if (isTilemapLoaded()) {
+    if (tilemap !== null) {
       code += '  dmaCopy((u16*) tilemap_image, SPRITE_GFX, 32768);\n';
       code += '  dmaCopy(palette, SPRITE_PALETTE, 512);\n\n';
     }
