@@ -1,2 +1,1 @@
-import {UtilityPanel} from './UtilityPanel';
-export {UtilityPanel};
+export {UtilityPanel} from './UtilityPanel';
