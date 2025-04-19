@@ -7,7 +7,7 @@ export function CodeOutput() {
 
   return (
     <div className="codeOutput">
-      <code>{codeOutput}</code>
+      <pre><code>{codeOutput}</code></pre>
     </div>
   )
 }
