@@ -1,13 +1,11 @@
 import React from 'react';
 import './CodeOutput.css';
-import {useCodeOutput} from 'hooks/useCodeOutput';
 
-export function CodeOutput() {
-  const {codeOutput} = useCodeOutput();
+export function CodeOutput(props) {
 
   return (
     <div className="codeOutput">
-      <pre><code>{codeOutput}</code></pre>
+      <pre><code>{props.code}</code></pre>
     </div>
   )
 }

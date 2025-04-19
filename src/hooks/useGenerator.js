@@ -154,5 +154,14 @@ export function useGenerator() {
     }
   };
 
+  generator.scrub_ = function(block, code, thisOnly) {
+    const nextBlock =
+      block.nextConnection && block.nextConnection.targetBlock();
+    if (nextBlock && !thisOnly) {
+      return code + generator.blockToCode(nextBlock);
+    }
+    return code;
+  }
+
   return {generator};
 }

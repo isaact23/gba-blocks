@@ -5,22 +5,17 @@ import {toolbox} from './toolbox';
 import {theme} from './theme';
 import {useSerialization} from "hooks/useSerialization";
 import {useGenerator} from "hooks/useGenerator";
-import {useCodeOutput} from "hooks/useCodeOutput";
 
-export function WorkspaceArea() {
+export function WorkspaceArea(props) {
   const {save, load} = useSerialization();
   const {generator} = useGenerator();
-  const {setCodeOutput} = useCodeOutput();
 
   const workspaceDiv = useRef(null);
-  const [workspace, setWorkspace] = useState(null);
 
   // Transform workspace blocks to GBA code
-  const runCode = () => {
-    if (!workspace) return;
-
+  const runCode = (workspace) => {
     const code = generator.workspaceToCode(workspace);
-    setCodeOutput(code);
+    props.setCode(code);
   };
 
   useEffect(() => {
@@ -31,7 +26,6 @@ export function WorkspaceArea() {
       renderer: 'zelos',
       theme: theme
     });
-    setWorkspace(ws);
 
     // Every time the workspace changes state, save the changes to storage.
     ws.addChangeListener((e) => {
@@ -53,14 +47,13 @@ export function WorkspaceArea() {
       ) {
         return;
       }
-      runCode();
+      runCode(ws);
     });
 
     // Load the initial state from storage and run the code.
     load(ws);
-    runCode();
+    runCode(ws);
 
-    setWorkspace(ws);
     return () => ws.dispose();
   }, []);
 
