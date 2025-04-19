@@ -1,5 +1,5 @@
-import {useTilemap} from 'src/hooks/useTilemap';
 import * as Blockly from "blockly";
+import {useTilemap} from 'hooks/useTilemap';
 
 export function useGenerator() {
   const {tilemap, tilemapString} = useTilemap();

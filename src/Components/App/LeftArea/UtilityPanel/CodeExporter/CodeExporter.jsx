@@ -1,3 +1,4 @@
+import React from 'react';
 import './CodeExporter.css';
 import fileSaver from "file-saver/dist/FileSaver";
 

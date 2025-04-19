@@ -1,5 +1,6 @@
+import React from 'react';
 import './TilemapUpload.css';
-import {useTilemap} from 'src/hooks/useTilemap';
+import {useTilemap} from 'hooks/useTilemap';
 
 export function TilemapUpload() {
   const {tilemap, setTilemap} = useTilemap();

@@ -1,5 +1,6 @@
+import React from 'react';
 import './UtilityPanel.css';
-import {useClasses} from 'src/hooks/useClasses';
+import {useClasses} from 'hooks/useClasses';
 import {CodeExporter} from "./CodeExporter";
 import {ClassManager} from "./ClassManager";
 import {TilemapUpload} from "./TilemapUpload/TilemapUpload";

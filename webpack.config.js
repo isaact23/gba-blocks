@@ -14,6 +14,10 @@ const config = {
   devServer: {
     static: './build',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+  },
   module: {
     rules: [
       {
@@ -21,6 +25,19 @@ const config = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        // Handle React files
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env', '@babel/preset-react',
+            ]
+          }
+        }
+      }
     ],
   },
   plugins: [
