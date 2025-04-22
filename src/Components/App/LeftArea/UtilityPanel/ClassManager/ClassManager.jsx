@@ -9,13 +9,21 @@ export function ClassManager() {
     let className = window.prompt("Enter class name", "New class");
     if (className == null || className === '') return;
 
-    createClass(className);
+    try {
+      createClass(className);
+    }
+    catch (error) {
+      window.alert(`Failed to create class "${className}": ${error.message}`);
+    }
   };
 
   return (
     <div className="utilitySubPanel">
       <h3>Class Definitions</h3>
       <button onClick={handleCreateClassBtn}><p>Create new class</p></button>
+      {classes.map(customClass =>
+        <p>{customClass.getName()}</p>
+      )}
     </div>
   )
 }
