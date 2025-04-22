@@ -2,7 +2,7 @@
 .leftArea {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  flex: 0 0 400px;
+  width: 600px;
+  flex: 0 0 600px;
   overflow: auto;
 }
