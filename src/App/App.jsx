@@ -3,6 +3,7 @@ import {LeftArea} from './LeftArea';
 import {WorkspaceArea} from './WorkspaceArea';
 import './App.css';
 import {NavBar} from "./NavBar";
+import { ModalManager } from './Modals';
 
 export function App() {
   const [code, setCode] = useState('');
@@ -14,6 +15,7 @@ export function App() {
         <LeftArea code={code} />
         <WorkspaceArea setCode={setCode} />
       </div>
+      <ModalManager />
     </div>
   );
 }

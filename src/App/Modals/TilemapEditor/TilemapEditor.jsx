@@ -1,8 +1,7 @@
-import React from 'react';
-import './TilemapUpload.css';
-import {useTilemap} from 'hooks/useTilemap';
+import {useTilemap} from "hooks/useTilemap";
+import React from "react";
 
-export function TilemapUpload() {
+export function TilemapEditor() {
   const {tilemap, setTilemap} = useTilemap();
 
   const handleFileUpload = (e) => {
@@ -12,10 +11,10 @@ export function TilemapUpload() {
   };
 
   return (
-    <div className="utilitySubPanel">
+    <div className="w3-modal">
       <h3>Upload Tilemap</h3>
       <p>Transparent color: 0xFF00FF</p>
       <input onInput={handleFileUpload} type="file" accept="img/png" />
     </div>
-  );
+  )
 }

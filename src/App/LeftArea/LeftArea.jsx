@@ -1,5 +1,4 @@
 import React from 'react';
-import './CodeOutput';
 import './UtilityPanel';
 import './LeftArea.css';
 import {UtilityPanel} from "./UtilityPanel";

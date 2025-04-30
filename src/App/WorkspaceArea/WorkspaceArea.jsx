@@ -3,8 +3,7 @@ import * as Blockly from 'blockly';
 import './WorkspaceArea.css';
 import {toolbox} from './toolbox';
 import {theme} from './theme';
-import {useSerialization} from "hooks/useSerialization";
-import {useGenerator} from "hooks/useGenerator";
+import {useSerialization, useGenerator} from 'hooks';
 
 export function WorkspaceArea(props) {
   const {save, load} = useSerialization();
