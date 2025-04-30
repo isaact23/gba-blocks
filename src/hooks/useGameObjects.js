@@ -18,7 +18,7 @@ export function useGameObjects() {
 
   const createGameObject = (name) => {
     if (nameTaken(name)) {
-      throw new Error(`Class name already taken`);
+      throw new Error(`Name already taken`);
     }
 
     let gameObject = new GameObject(name);

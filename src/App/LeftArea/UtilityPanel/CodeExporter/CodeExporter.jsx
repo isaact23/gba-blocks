@@ -1,11 +1,13 @@
 import React from 'react';
 import './CodeExporter.css';
 import fileSaver from "file-saver/dist/FileSaver";
+import {useMainStore} from "hooks/stores/useMainStore";
 
-export function CodeExporter(props) {
+export function CodeExporter() {
+  const code = useMainStore((state) => state.code);
   const handleDownloadCodeBtn = () => {
-    props.workspace.runCode();
-    const blob = new Blob([props.workspace.getCode()], {type: "text/c;charset=utf-8"});
+    //props.workspace.runCode();
+    const blob = new Blob([code], {type: "text/c;charset=utf-8"});
     fileSaver.saveAs(blob, "main.c");
   }
 

@@ -23,7 +23,7 @@ export function GameObjectPanel() {
   return (
     <div className="utilitySubPanel">
       <h3>Game Objects</h3>
-      <button onClick={handleCreateClassBtn}><p>Create new Game Object</p></button>
+      <button onClick={handleCreateClassBtn}><p>Create Game Object</p></button>
       {gameObjects.map(gameObject =>
         <p>{gameObject.getName()}</p>
       )}

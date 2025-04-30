@@ -3,7 +3,7 @@ import './UtilityPanel';
 import './LeftArea.css';
 import {UtilityPanel} from "./UtilityPanel";
 
-export function LeftArea(props) {
+export function LeftArea() {
   return (
     <div className="leftArea">
       <UtilityPanel />

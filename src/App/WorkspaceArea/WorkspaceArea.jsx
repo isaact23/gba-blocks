@@ -4,8 +4,11 @@ import './WorkspaceArea.css';
 import {toolbox} from './toolbox';
 import {theme} from './theme';
 import {useSerialization, useGenerator} from 'hooks';
+import {useMainStore} from "hooks/stores/useMainStore";
 
-export function WorkspaceArea(props) {
+export function WorkspaceArea() {
+  const setCode = useMainStore((state) => state.setCode);
+
   const {save, load} = useSerialization();
   const {generator} = useGenerator();
 
@@ -14,7 +17,7 @@ export function WorkspaceArea(props) {
   // Transform workspace blocks to GBA code
   const runCode = (workspace) => {
     const code = generator.workspaceToCode(workspace);
-    props.setCode(code);
+    setCode(code);
   };
 
   useEffect(() => {
