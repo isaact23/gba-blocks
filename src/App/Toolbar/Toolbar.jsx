@@ -1,12 +1,10 @@
 import React from 'react';
-import './NavBar.css';
+import './Toolbar.css';
+import {useMainStore} from 'hooks/stores/useMainStore';
+import * as MODAL from "enums/modals";
 
-import * as MODAL from "hooks/useModal";
-
-export function NavBar(props) {
-  const setActiveModal = (modal) => {
-    props.setActiveModal(modal);
-  }
+export function Toolbar() {
+  const setActiveModal = useMainStore((state) => state.setActiveModal);
 
   return (
     <div className="w3-bar w3-gray">

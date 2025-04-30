@@ -1,13 +1,12 @@
 import {useState} from 'react';
-import {GbaClass} from 'classes/gbaClass';
-
-export function useClasses() {
-  const [classes, setClasses] = useState([]);
+import {GameObject} from 'classes/gameObject';
+export function useGameObjects() {
+  const [gameObjects, setGameObjects] = useState([]);
 
   // Determine if a class name is already taken.
   const nameTaken = (name) => {
     console.log("Is name taken " + name);
-    for (let item of classes) {
+    for (let item of gameObjects) {
 
       if (item.getName().toLowerCase().trim() === name.toLowerCase().trim()) {
         console.log("They equal!");
@@ -17,14 +16,14 @@ export function useClasses() {
     return false;
   }
 
-  const createClass = (name) => {
+  const createGameObject = (name) => {
     if (nameTaken(name)) {
       throw new Error(`Class name already taken`);
     }
 
-    let gbaClass = new GbaClass(name);
-    setClasses(classes.concat([gbaClass]));
+    let gameObject = new GameObject(name);
+    setGameObjects(gameObjects.concat([gameObject]));
   }
 
-  return {classes, createClass};
+  return {gameObjects, createGameObject};
 }

@@ -1,21 +1,21 @@
 import { TilemapEditor } from "./TilemapEditor";
 import React from 'react';
 import "./Modal.css";
-import * as MODAL from 'hooks/useModal';
+import {useMainStore} from 'hooks/stores/useMainStore';
+import * as MODAL from 'enums/modals';
 
-export function ModalManager(props) {
+export function ModalManager() {
+  const activeModal = useMainStore((state) => state.activeModal);
+  const setActiveModal = useMainStore((state) => state.setActiveModal);
 
   const getActiveModal = () => {
-    switch (props.activeModal) {
+    switch (activeModal) {
       case MODAL.TILEMAP: return <TilemapEditor />;
       default: return null;
     }
   }
-  const setActiveModal = (modal) => {
-    props.setActiveModal(modal);
-  }
 
-  if (props.activeModal == MODAL.NONE) return null;
+  if (activeModal == MODAL.NONE) return null;
 
   return (
     <div className="w3-modal gba-modal">
