@@ -11,7 +11,7 @@ export function TilemapEditor() {
   };
 
   return (
-    <div className="w3-modal">
+    <div className="tilemapEditor">
       <h3>Upload Tilemap</h3>
       <p>Transparent color: 0xFF00FF</p>
       <input onInput={handleFileUpload} type="file" accept="img/png" />

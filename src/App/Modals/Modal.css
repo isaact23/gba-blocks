@@ -1,0 +1,9 @@
+.gba-modal {
+  display: block;
+  z-index: 100;
+}
+
+.gba-modal-content {
+  width: 800px;
+  padding: 20px;
+}
